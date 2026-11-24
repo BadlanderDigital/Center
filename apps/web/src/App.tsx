@@ -56,9 +56,6 @@ const SearchModal = lazy(() =>
     default: m.SearchModal,
   })),
 );
-const SharePage = lazy(() =>
-  import("./pages/SharePage").then((m) => ({ default: m.SharePage })),
-);
 const LoadingSpinner: React.FC<{ message: string }> = ({ message }) => (
   <div className="h-screen w-screen bg-background flex flex-col items-center justify-center">
     <div className="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin mb-3" />
@@ -105,7 +102,6 @@ function App() {
     route === "templates" ||
     route === "recent" ||
     (route === "welcome" && (!skipWelcomeScreen || onboardingBandOpen));
-  const isSharePage = route === "share" && params.shareId;
 
   useEffect(() => {
     if (activeModal === "scriptView") setHasOpenedScriptView(true);
@@ -223,7 +219,6 @@ function App() {
     // a real project for autosave and preview-proxy lifecycle subscriptions.
     if (
       showWelcome ||
-      isSharePage ||
       route === "new" ||
       isChecking ||
       showDialog ||
@@ -234,7 +229,6 @@ function App() {
     createNewProject("New Project");
   }, [
     showWelcome,
-    isSharePage,
     route,
     isChecking,
     showDialog,
@@ -280,13 +274,7 @@ function App() {
       <Suspense fallback={null}>
         <KieAIPollerHost />
       </Suspense>
-      {isSharePage ? (
-        <Suspense
-          fallback={<LoadingSpinner message="Loading shared video..." />}
-        >
-          <SharePage shareId={params.shareId!} />
-        </Suspense>
-      ) : showWelcome ? (
+      {showWelcome ? (
         <WelcomeScreen initialTab={initialTab} />
       ) : !hasOpenProject ? (
         <LoadingSpinner

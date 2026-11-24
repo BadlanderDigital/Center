@@ -1,22 +1,22 @@
-# OpenReel Video
+# ShoRebel Studio
 
-> **The open source CapCut alternative. Professional video editing in your browser. No uploads. No installs. 100% open source.**
+> **The video editor for live sellers. Professional video editing in your browser. No uploads. No installs.**
 
-OpenReel Video is a fully-featured browser-based video editor that runs entirely client-side. Built with React, TypeScript, WebCodecs, and WebGPU for professional-grade video editing without the need for expensive software or cloud processing.
+ShoRebel Studio is a fully-featured browser-based video editor that runs entirely client-side. Built with React, TypeScript, WebCodecs, and WebGPU for professional-grade video editing without the need for expensive software or cloud processing.
 
-**[Try it Live](https://openreel.video)** | **[Documentation](CONTRIBUTING.md)** | **[Discussions](https://github.com/Augani/openreel-video/discussions)** | **[Twitter](https://x.com/python_xi)**
+**[Try it Live](https://studio.shorebel.com)** | **[Documentation](CONTRIBUTING.md)**
 
-![OpenReel Editor](https://img.shields.io/badge/Lines%20of%20Code-130k+-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Status](https://img.shields.io/badge/Status-Beta-orange) ![Open Source](https://img.shields.io/badge/Open%20Source-100%25-brightgreen) [![Sponsor Augani](https://img.shields.io/github/sponsors/Augani?logo=githubsponsors&label=Sponsor&color=EA4AAA)](https://github.com/sponsors/Augani)
+![Editor](https://img.shields.io/badge/Lines%20of%20Code-130k+-blue) ![License](https://img.shields.io/badge/License-MIT-green) ![Status](https://img.shields.io/badge/Status-Beta-orange) ![Open Source](https://img.shields.io/badge/Open%20Source-100%25-brightgreen)
 
 ---
 
-## Why OpenReel?
+## Why ShoRebel Studio?
 
 - **100% Client-Side** - Your videos never leave your device. No uploads, no cloud processing, complete privacy.
 - **No Installation** - Works in Chrome/Edge. Just open and start editing.
 - **Professional Features** - Multi-track timeline, keyframe animations, color grading, audio effects, and more.
 - **GPU Accelerated** - WebGPU and WebCodecs for smooth 4K editing and fast exports.
-- **Free Forever** - MIT licensed, no subscriptions, no watermarks.
+- **ShoRebel Station perk** - Included with ShoRebel Station, built for live sellers.
 
 ---
 
@@ -92,7 +92,7 @@ OpenReel Video is a fully-featured browser-based video editor that runs entirely
 ## Quick Start
 
 ### Try Online
-Visit **[openreel.video](https://openreel.video)** to start editing immediately.
+Visit **[studio.shorebel.com](https://studio.shorebel.com)** to start editing immediately.
 
 To edit by chatting with OpenAI, Anthropic, or any OpenAI-compatible endpoint, follow the
 **[AI Editor setup guide](docs/AGENT-GUIDE.md#bring-your-own-key-web--desktop-chat)**.
@@ -101,8 +101,8 @@ To edit by chatting with OpenAI, Anthropic, or any OpenAI-compatible endpoint, f
 
 ```bash
 # Clone the repository
-git clone https://github.com/Augani/openreel-video.git
-cd openreel-video
+git clone https://github.com/BadlanderDigital/ReelRebel.git
+cd ReelRebel
 
 # Install dependencies (requires Node.js 18+)
 pnpm install
@@ -145,7 +145,7 @@ All major browsers now support WebCodecs for hardware-accelerated video encoding
 ### Monorepo Structure
 
 ```
-openreel/
+reelrebel/
 ├── apps/web/              # React frontend (~66k lines)
 │   └── src/
 │       ├── components/    # UI components
@@ -166,7 +166,7 @@ openreel/
 
 ### Key Technologies
 
-- **React 18** + **TypeScript** - Type-safe UI
+- **React 19** + **TypeScript** - Type-safe UI
 - **Zustand** - Lightweight state management
 - **MediaBunny** - Video/audio processing
 - **WebCodecs** - Hardware encoding/decoding
@@ -184,32 +184,13 @@ openreel/
 
 ---
 
-## AI-Managed Development
-
-OpenReel is an experiment in AI-assisted open source development. Claude AI helps manage:
-
-- **Issue triage** - Reviews and responds to issues
-- **Code implementation** - Writes features and fixes bugs
-- **Code review** - Maintains quality standards
-- **Documentation** - Keeps docs up to date
-
-Human oversight from Augustus ensures strategic direction and final approval on major changes. All code is public, tested, and follows best practices.
-
-**What this means for contributors:**
-- Issues get reviewed quickly (usually within 24 hours)
-- Bug fixes ship fast
-- Clear, detailed responses to questions
-- High code quality standards
-
----
-
 ## Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 **Ways to contribute:**
 - Report bugs with reproduction steps
-- Suggest features in Discussions
+- Suggest features
 - Submit PRs for bugs or features
 - Improve documentation
 - Write tests
@@ -218,7 +199,7 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 **Development workflow:**
 ```bash
 # Fork and clone
-git clone https://github.com/Augani/openreel-video.git
+git clone https://github.com/BadlanderDigital/ReelRebel.git
 
 # Create feature branch
 git checkout -b feat/your-feature
@@ -268,6 +249,13 @@ git push origin feat/your-feature
 
 ---
 
+## Attribution
+
+ShoRebel Studio is based on OpenReel, an MIT-licensed open source video editor
+(Copyright (c) 2024-2026 Augustus Otu and Contributors). See [LICENSE](LICENSE) for details.
+
+---
+
 ## License
 
 MIT License - Use freely for personal and commercial projects.
@@ -295,17 +283,7 @@ See [LICENSE](LICENSE) for details.
 ## Support
 
 - **GitHub Issues** - Bug reports and feature requests
-- **GitHub Discussions** - Questions and community chat
-- **Twitter/X** - [@python_xi](https://x.com/python_xi)
 
 ---
 
-## $OPENREEL Token
-
-CA: `B7wDnfrdtvdG7SCkRjSMJ6LkVwGWvdWrQ75iV8G9pump`
-
----
-
-**Built with care by [@python_xi](https://x.com/python_xi) and AI working together.**
-
-*Making professional video editing accessible to everyone. Forever free. Forever open source.*
+*Making professional video editing accessible to live sellers.*

@@ -5,12 +5,12 @@
  * swapped for different environments or self-hosted instances.
  */
 
-const isDev = import.meta.env.DEV;
-
-/** OpenReel cloud services */
-export const OPENREEL_CLOUD_URL = isDev
-  ? "http://localhost:8787"
-  : "https://api.openreel.video";
+/**
+ * Studio has no cloud backend. The upstream OpenReel cloud URL was removed
+ * in the ShoRebel rebrand (share/upload flows are disabled). This export is
+ * kept so existing imports do not break; it must stay an empty string.
+ */
+export const OPENREEL_CLOUD_URL = "";
 
 /**
  * Third-party API base URLs.

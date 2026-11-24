@@ -1,8 +1,8 @@
 {
-  "name": "openreel",
+  "name": "shorebel-studio",
   "version": "0.1.2",
   "private": true,
-  "description": "Professional video, audio, and photo editing in your browser",
+  "description": "ShoRebel Studio — browser-based video editor for live sellers",
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter @openreel/web dev",
@@ -37,16 +37,16 @@
     "color-grading",
     "export"
   ],
-  "author": "Augustus Otu and Contributors",
+  "author": "ShoRebel",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Augani/openreel-video.git"
+    "url": "https://github.com/BadlanderDigital/ReelRebel.git"
   },
   "bugs": {
-    "url": "https://github.com/Augani/openreel-video/issues"
+    "url": "https://github.com/BadlanderDigital/ReelRebel/issues"
   },
-  "homepage": "https://openreel.video",
+  "homepage": "https://studio.shorebel.com",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"

@@ -146,7 +146,9 @@ export const useSettingsStore = create<SettingsState>()(
         favoriteModels: [],
         configuredServices: [],
 
-        mcpAutoAllowTrustedLocal: true,
+        // ShoRebel: auto-allow is OFF by default — destructive/expensive
+        // MCP tools must prompt for approval.
+        mcpAutoAllowTrustedLocal: false,
         agentAutoConfirm: false,
         agentDryRun: false,
 
@@ -248,11 +250,11 @@ export const useSettingsStore = create<SettingsState>()(
         closeSettings: () => set({ settingsOpen: false }),
       }),
       {
-        name: "openreel-settings",
+        name: "shorebel-studio-settings",
         version: 7,
         migrate: (persisted, version) => {
           const next = (persisted ?? {}) as Record<string, unknown>;
-          if (version < 2) next.mcpAutoAllowTrustedLocal = true;
+          if (version < 2) next.mcpAutoAllowTrustedLocal = false;
           if (version < 3 && (!next.llmModel || next.llmModel === "gpt-4o")) {
             next.llmModel = "gpt-5.6-sol";
           }

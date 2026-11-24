@@ -16,7 +16,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // ── v2 editor tokens (cinematic, emerald)
+        // ── v2 editor tokens (cinematic, ShoRebel blue)
         //   color-mix preserves alpha modifiers for raw CSS color tokens.
         bg: {
           DEFAULT: token("bg"),
@@ -113,7 +113,9 @@ export default {
       },
       fontFamily: {
         sans: [
-          "Inter",
+          "Lexend Deca",
+          "Lexend",
+          "DM Sans",
           "-apple-system",
           "BlinkMacSystemFont",
           "system-ui",

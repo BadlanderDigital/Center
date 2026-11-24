@@ -1,11 +1,11 @@
 {
-  "name": "OpenReel",
-  "short_name": "OpenReel",
-  "description": "Professional browser-based video, audio, and photo editing application",
+  "name": "ShoRebel Studio",
+  "short_name": "ShoRebel Studio",
+  "description": "ShoRebel Studio — browser-based video editor for live sellers",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1C1C1E",
-  "theme_color": "#3b82f6",
+  "theme_color": "#00D4FF",
   "orientation": "landscape",
   "icons": [
     {
