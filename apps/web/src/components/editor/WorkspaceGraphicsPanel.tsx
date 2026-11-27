@@ -1,4 +1,4 @@
-import { Suspense, lazy, useMemo, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
 import { Button, Input, ColorPicker, ScrollArea, Collapsible, CollapsibleTrigger, CollapsibleContent, Label, Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@openreel/ui";
 import {
   Circle,
@@ -109,6 +109,9 @@ export function WorkspaceGraphicsPanel({
     () => readBrandValue("openreel-brand-name", ""),
   );
   const [brandFont, setBrandFont] = useState(() => readBrandValue("openreel-brand-font", "Inter"));
+  const [brandLogo, setBrandLogo] = useState(() => readBrandValue("openreel-brand-logo", ""));
+  const [brandSite, setBrandSite] = useState(() => readBrandValue("openreel-brand-site", ""));
+  const [brandNote, setBrandNote] = useState(() => readBrandValue("openreel-brand-bio", ""));
   const [applyingBrand, setApplyingBrand] = useState(false);
   const [brandConfigured, setBrandConfigured] = useState(() => {
     try {
@@ -129,7 +132,40 @@ export function WorkspaceGraphicsPanel({
   }, [project.textClips, project.timeline.tracks]);
   const beginBrandEdit = useTextFontEdit(project.id, targets.map(clip => clip.id));
   const customFonts = useCustomFonts();
+  useEffect(() => {
+    const sync = () => {
+      setBrandName(readBrandValue("openreel-brand-name", ""));
+      setBrandFont(readBrandValue("openreel-brand-font", "Inter"));
+      setBrandLogo(readBrandValue("openreel-brand-logo", ""));
+      setBrandSite(readBrandValue("openreel-brand-site", ""));
+      setBrandNote(readBrandValue("openreel-brand-bio", ""));
+      try {
+        const saved: unknown = JSON.parse(localStorage.getItem("openreel-brand-colors") ?? "null");
+        if (Array.isArray(saved) && saved.length === 4 && saved.every((c): c is string => typeof c === "string" && /^#[0-9a-f]{6}$/i.test(c))) {
+          setColors(saved);
+          setBrandConfigured(true);
+        }
+      } catch {
+        /* keep the colors already on screen */
+      }
+    };
+    window.addEventListener("shorebel-brand", sync);
+    return () => window.removeEventListener("shorebel-brand", sync);
+  }, []);
   const fonts = useMemo(() => [...new Set([brandFont, ...builtInFonts, ...customFonts])], [brandFont, customFonts]);
+  const addBrandLogo = async () => {
+    if (!brandLogo) return;
+    try {
+      const response = await fetch(brandLogo);
+      if (!response.ok) throw new Error("missing");
+      const blob = await response.blob();
+      const file = new File([blob], "brand-logo", { type: blob.type || "image/png" });
+      await useProjectStore.getState().importMedia(file);
+      toast.success("Logo added", "Your brand logo is in the media bin.");
+    } catch {
+      toast.error("Logo not added", "Open Studio from ShoRebel so the brand logo can load.");
+    }
+  };
   const applyBrand = async () => {
     if (applyRequest.current || targets.length === 0) return;
     const request = {};
@@ -288,6 +324,22 @@ export function WorkspaceGraphicsPanel({
                   />
                 ))}
               </div>
+              {brandLogo && (
+                <div className="workspace-brand-summary">
+                  <strong>From ShoRebel</strong>
+                  <div className="flex items-center gap-3">
+                    <img src={brandLogo} alt="" className="h-10 w-10 object-contain rounded-md bg-bg-1" />
+                    <div className="min-w-0">
+                      {brandName ? <p className="text-[12px] text-fg">{brandName}</p> : null}
+                      {brandSite ? <p className="workspace-brand-fonts truncate">{brandSite}</p> : null}
+                      {brandNote ? <p className="workspace-brand-fonts">{brandNote}</p> : null}
+                    </div>
+                  </div>
+                  <Button className="workspace-apply-brand" type="button" onClick={() => { void addBrandLogo(); }}>
+                    Add logo to media
+                  </Button>
+                </div>
+              )}
               <div className="mt-3 space-y-1.5">
                 <Label htmlFor="brand-title-font" className="text-[11px] text-fg-muted">Title font</Label>
                 <Select value={brandFont} onValueChange={family => {
