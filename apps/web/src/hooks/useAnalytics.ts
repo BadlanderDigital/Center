@@ -4,37 +4,24 @@ type EventProperties = Record<string, string | number | boolean | null>;
 
 const analyticsKey = import.meta.env.VITE_PUBLIC_POSTHOG_KEY;
 const analyticsHost = import.meta.env.VITE_PUBLIC_POSTHOG_HOST;
-let analyticsClientPromise: Promise<typeof import("posthog-js").default | null> | null = null;
 
-function getAnalyticsClient(): Promise<typeof import("posthog-js").default | null> {
-  if (!analyticsKey || !analyticsHost) return Promise.resolve(null);
-  if (!analyticsClientPromise) {
-    analyticsClientPromise = import("posthog-js").then(({ default: client }) => {
-      client.init(analyticsKey, {
-        api_host: analyticsHost,
-        capture_pageview: true,
-        capture_pageleave: true,
-      });
-      return client;
-    });
-  }
-  return analyticsClientPromise;
+/** PostHog is not bundled with ShoRebel Studio. Calls stay no-ops. */
+function getAnalyticsClient(): Promise<null> {
+  return Promise.resolve(null);
 }
 
 export function useAnalytics() {
-  const track = useCallback(
-    (event: string, properties?: EventProperties) => {
-      void getAnalyticsClient().then((client) => client?.capture(event, properties));
-    },
-    [],
-  );
+  const track = useCallback((event: string, properties?: EventProperties) => {
+    void event;
+    void properties;
+    void getAnalyticsClient();
+  }, []);
 
-  const identify = useCallback(
-    (userId: string, properties?: EventProperties) => {
-      void getAnalyticsClient().then((client) => client?.identify(userId, properties));
-    },
-    [],
-  );
+  const identify = useCallback((userId: string, properties?: EventProperties) => {
+    void userId;
+    void properties;
+    void getAnalyticsClient();
+  }, []);
 
   return { track, identify, isEnabled: Boolean(analyticsKey && analyticsHost) };
 }
