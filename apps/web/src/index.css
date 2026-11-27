@@ -252,8 +252,57 @@
 }
 
 /* ---------- ShoRebel: pill buttons ---------- */
-/* Buttons use Tailwind rounded-* classes; this overrides them to pill
-   shape. Visual check owed in the remote build. */
+/* Text and icon buttons are pills. Icon buttons are square, so the pill reads as a circle.
+   Layout, type, and color stay on the editor tokens. */
 button[class*="rounded"] {
   border-radius: 9999px;
+}
+
+.studio-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.studio-lockup .studio-wordmark {
+  width: auto;
+  height: 22px;
+  max-width: 168px;
+  object-fit: contain;
+}
+.studio-lockup .studio-wordmark-on-dark { display: none; }
+:root[data-theme="dark"] .studio-lockup .studio-wordmark-on-light,
+.dark .studio-lockup .studio-wordmark-on-light { display: none; }
+:root[data-theme="dark"] .studio-lockup .studio-wordmark-on-dark,
+.dark .studio-lockup .studio-wordmark-on-dark { display: block; }
+.studio-lockup-label {
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--fg-2);
+  line-height: 1;
+}
+.workspace-brand .studio-lockup .studio-wordmark { height: 18px; max-width: 132px; }
+.mobile-studio-lockup { display: flex; align-items: center; padding-top: 2px; }
+.studio-brand-ready {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  color: var(--fg-3);
+  font-size: 12px;
+}
+.studio-brand-ready img {
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: var(--bg-2);
+}
+.studio-brand-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
 }
