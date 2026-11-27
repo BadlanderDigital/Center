@@ -15,6 +15,7 @@ import { useEditorWorkspaceStore } from "../../stores/editor-workspace-store";
 import { useRouter } from "../../hooks/use-router";
 import { toast } from "../../stores/notification-store";
 import "./mobile-project-home.css";
+import { StudioLockup } from "../brand/StudioLockup";
 
 const TemplateGallery = lazy(() => import("./TemplateGallery").then(m => ({ default: m.TemplateGallery })));
 const SettingsDialog = lazy(() => import("../editor/settings/SettingsDialog").then(m => ({ default: m.SettingsDialog })));
@@ -145,6 +146,7 @@ export function MobileProjectHome({ initialTab }: { initialTab?: "templates" | "
       </header>
       <ScrollArea className="mobile-project-scroll">
         {tab === "projects" ? <div className="mobile-project-body">
+          <div className="mobile-studio-lockup"><StudioLockup /></div>
           {searching && <Input autoFocus aria-label="Search drafts" placeholder="Search projects" value={query} onChange={e => setQuery(e.target.value)} onKeyDown={e => { if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); setQuery(""); setSearching(false); } }}/>} 
           <DropdownMenu>
             <DropdownMenuTrigger asChild><Button className="mobile-new-project" disabled={opening !== null}>
