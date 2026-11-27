@@ -34,6 +34,7 @@ import { connectionOf, useCollabStore } from "../../services/collab/collab-store
 import { useSettingsStore } from "../../stores/settings-store";
 import { toast } from "../../stores/notification-store";
 import { useAnalytics, AnalyticsEvents } from "../../hooks/useAnalytics";
+import { StudioLockup } from "../brand/StudioLockup";
 
 // Dialogs that only open on demand stay out of the editor chunk (bundle-budgets.json).
 // Settings (API keys, MCP, watch folders, render cache) is not a first-paint feature: its chunk loads the first time it opens.
@@ -302,7 +303,7 @@ export const Toolbar: React.FC = () => {
           state={exportState} disabled={false} compact onOpen={openExportDialog} onCancel={handleCancelExport} onDismissError={resetError} />}
         menu={<EditorMenuBar onExport={openExportDialog} onQuickExport={handleQuickExport} onCompress={() => setIsCompressOpen(true)}/>}
       /> : <><ProjectSwitcher trigger={<ShadcnButton variant="ghost" className="workspace-brand p-0 h-auto" aria-label="Project menu">
-        <img src={`${import.meta.env.BASE_URL}icons/editor-reel.svg`} alt="" />OpenReel
+        <StudioLockup />
       </ShadcnButton>} />
       <EditorMenuBar onExport={openExportDialog} onQuickExport={handleQuickExport} onCompress={() => setIsCompressOpen(true)} />
       <div className="workspace-project">
