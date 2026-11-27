@@ -32,6 +32,8 @@ import { useOnboardingStore } from "../../stores/onboarding-store";
 import { PathBand } from "../onboarding/shell/PathBand";
 import { isDesktopRuntime, useOnboardingGate } from "../onboarding/shell/useOnboardingGate";
 import { withUserProjectCreation } from "../onboarding/shell/project-intent";
+import { StudioLockup } from "../brand/StudioLockup";
+import { readPulledBrand } from "../../brand/shorebel-kit";
 
 const isDesktop =
   typeof window !== "undefined" && window.openreel?.platform === "desktop";
@@ -98,26 +100,6 @@ const FORMAT_OPTIONS: FormatOption[] = [
     gradient: "from-orange-500/20 to-rose-500/20",
   },
 ];
-
-const ShoRebelLogo: React.FC<{ className?: string }> = ({ className = "" }) => (
-  <svg
-    viewBox="0 0 490 490"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className={className}
-  >
-    <rect
-      x="24.5"
-      y="24.5"
-      width="441"
-      height="441"
-      rx="108"
-      stroke="currentColor"
-      strokeWidth="30.625"
-    />
-    <path d="M200 150 L340 245 L200 340 Z" fill="currentColor" />
-  </svg>
-);
 
 type ViewMode = "home" | "templates" | "recent";
 
@@ -306,6 +288,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ initialTab }) => {
   // First-run mode (the path band is showing) compacts the page so the band, the format cards and the
   // footer all fit the 1024x700 minimum window without scrolling (spec 2.1 "Fit").
   const compact = gate.showBand;
+  const pulled = readPulledBrand();
   return (
     <div className="fixed inset-0 z-50 bg-background overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(0,212,255,0.05),transparent_60%)]" />
@@ -320,13 +303,8 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ initialTab }) => {
                 compact ? "mb-3" : "mb-12",
               )}
             >
-              <div className={cn("flex items-center gap-3", compact ? "mb-2" : "mb-6")}>
-                <div className={cn("text-primary", compact ? "w-10 h-10" : "w-12 h-12")}>
-                  <ShoRebelLogo className="w-full h-full" />
-                </div>
-                <span className="font-semibold text-xl text-text-primary tracking-tight">
-                  ShoRebel Studio
-                </span>
+              <div className={cn("flex items-center justify-center", compact ? "mb-2" : "mb-6")}>
+                <StudioLockup size={compact ? "md" : "lg"} />
               </div>
 
               <span
@@ -349,6 +327,15 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ initialTab }) => {
                 <span className="font-normal text-base text-text-muted max-w-md">
                   Pick a format and start creating. You can change this anytime.
                 </span>
+              )}
+              {pulled && (pulled.logo || pulled.colors.length > 0) && (
+                <div className="studio-brand-ready" role="status">
+                  {pulled.logo ? <img src="/api/brand-logo" alt="" /> : null}
+                  {pulled.colors.map((color) => (
+                    <span key={color} className="studio-brand-swatch" style={{ background: color }} />
+                  ))}
+                  <span>Your brand is ready in the editor.</span>
+                </div>
               )}
             </div>
 
