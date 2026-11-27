@@ -23,6 +23,8 @@ import { keyboardShortcuts } from "./services/keyboard-shortcuts";
 import { createEditorProject } from "./services/project-creation";
 import { toast } from "./stores/notification-store";
 import { useSceneDetectionDialogStore } from "./stores/scene-detection-dialog-store";
+import { useStudioAccess } from "./brand/shorebel-kit";
+import { StudioGate } from "./components/brand/StudioGate";
 
 // Polls accepted KieAI generations; loads after first paint so the poller and the KieAI client are not in the startup chunk.
 const KieAIPollerHost = lazy(() => import("./hooks/KieAIPollerHost"));
@@ -72,6 +74,7 @@ const PRESET_DIMENSIONS: Record<string, SocialMediaCategory> = {
 };
 
 function App() {
+  const studioAccess = useStudioAccess();
   const activeModal = useUIStore((state) => state.activeModal);
   const closeModal = useUIStore((state) => state.closeModal);
   const skipWelcomeScreen = useUIStore((state) => state.skipWelcomeScreen);
@@ -268,7 +271,11 @@ function App() {
         ? "recent"
         : undefined;
 
-  return (
+  return studioAccess === "checking" ? (
+    <LoadingSpinner message="Opening Studio..." />
+  ) : studioAccess === "denied" ? (
+    <StudioGate />
+  ) : (
     <div className="h-screen h-[100dvh] w-screen bg-background text-text-primary overflow-hidden">
       <MobileBlocker />
       <Suspense fallback={null}>
